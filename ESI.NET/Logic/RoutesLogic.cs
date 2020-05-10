@@ -11,7 +11,10 @@ namespace ESI.NET.Logic
         private readonly HttpClient _client;
         private readonly EsiConfig _config;
 
-        public RoutesLogic(HttpClient client, EsiConfig config) { _client = client; _config = config; }
+        public RoutesLogic(HttpClient client, EsiConfig config)
+        {
+            _client = client; _config = config;
+        }
 
         /// <summary>
         /// /route/{origin}/{destination}/
@@ -23,10 +26,10 @@ namespace ESI.NET.Logic
         /// <param name="connections"></param>
         /// <returns></returns>
         public async Task<EsiResponse<int[]>> Map(
-            int origin, 
-            int destination, 
-            RoutesFlag flag = RoutesFlag.Shortest, 
-            int[] avoid = null, 
+            int origin,
+            int destination,
+            RoutesFlag flag = RoutesFlag.Shortest,
+            int[] avoid = null,
             int[] connections = null)
         {
             var parameters = new List<string>() { $"flag={flag.ToEsiValue()}" };

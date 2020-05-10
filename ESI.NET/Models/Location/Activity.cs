@@ -5,9 +5,6 @@ namespace ESI.NET.Models.Location
 {
     public class Activity
     {
-        [JsonProperty("online")]
-        public bool Online { get; set; }
-
         [JsonProperty("last_login")]
         public DateTime LastLogin { get; set; }
 
@@ -16,5 +13,8 @@ namespace ESI.NET.Models.Location
 
         [JsonProperty("logins")]
         public int Logins { get; set; }
+
+        [JsonProperty("online")]
+        public bool Online { get; set; }
     }
 }

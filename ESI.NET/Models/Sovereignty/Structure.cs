@@ -8,11 +8,11 @@ namespace ESI.NET.Models.Sovereignty
         [JsonProperty("alliance_id")]
         public int AllianceId { get; set; }
 
-        [JsonProperty("solar_system_id")]
-        public int SolarSystemId { get; set; }
-
         [JsonProperty("structure_id")]
         public long Id { get; set; }
+
+        [JsonProperty("solar_system_id")]
+        public int SolarSystemId { get; set; }
 
         [JsonProperty("structure_type_id")]
         public int TypeId { get; set; }

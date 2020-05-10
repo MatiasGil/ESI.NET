@@ -4,9 +4,6 @@ namespace ESI.NET.Models.Character
 {
     public class Stats
     {
-        [JsonProperty("year")]
-        public int Year { get; set; }
-
         [JsonProperty("character")]
         public CharacterInfo Character { get; set; }
 
@@ -42,5 +39,8 @@ namespace ESI.NET.Models.Character
 
         [JsonProperty("travel")]
         public Travel Travel { get; set; }
+
+        [JsonProperty("year")]
+        public int Year { get; set; }
     }
 }

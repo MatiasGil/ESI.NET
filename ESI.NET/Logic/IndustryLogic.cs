@@ -28,18 +28,23 @@ namespace ESI.NET.Logic
         }
 
         /// <summary>
+        /// /corporation/{corporation_id}/mining/extractions/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<Extraction>>> Extractions()
+            => await Execute<List<Extraction>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporation/{corporation_id}/mining/extractions/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "corporation_id", corporation_id.ToString() }
+                },
+                token: _data.Token);
+
+        /// <summary>
         /// /industry/facilities/
         /// </summary>
         /// <returns></returns>
         public async Task<EsiResponse<List<Facility>>> Facilities()
             => await Execute<List<Facility>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/industry/facilities/");
-
-        /// <summary>
-        /// /industry/systems/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<SolarSystem>>> SolarSystemCostIndices()
-            => await Execute<List<SolarSystem>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/industry/systems/");
 
         /// <summary>
         /// /characters/{character_id}/industry/jobs/
@@ -59,6 +64,25 @@ namespace ESI.NET.Logic
                 token: _data.Token);
 
         /// <summary>
+        /// /corporations/{corporation_id}/industry/jobs/
+        /// </summary>
+        /// <param name="include_completed"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<Job>>> JobsForCorporation(bool include_completed = false, int page = 1)
+            => await Execute<List<Job>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporations/{corporation_id}/industry/jobs/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "corporation_id", corporation_id.ToString() }
+                },
+                parameters: new string[]
+                {
+                    $"include_completed={include_completed}",
+                    $"page={page}"
+                },
+                token: _data.Token);
+
+        /// <summary>
         /// /characters/{character_id}/mining/
         /// </summary>
         /// <param name="page"></param>
@@ -68,23 +92,6 @@ namespace ESI.NET.Logic
                 replacements: new Dictionary<string, string>()
                 {
                     { "character_id", character_id.ToString() }
-                },
-                parameters: new string[]
-                {
-                    $"page={page}"
-                },
-                token: _data.Token);
-
-        /// <summary>
-        /// /corporation/{corporation_id}/mining/observers/
-        /// </summary>
-        /// <param name="page"></param>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<Observer>>> Observers(int page = 1)
-            => await Execute<List<Observer>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporation/{corporation_id}/mining/observers/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "corporation_id", corporation_id.ToString() }
                 },
                 parameters: new string[]
                 {
@@ -112,34 +119,27 @@ namespace ESI.NET.Logic
                 token: _data.Token);
 
         /// <summary>
-        /// /corporations/{corporation_id}/industry/jobs/
+        /// /corporation/{corporation_id}/mining/observers/
         /// </summary>
-        /// <param name="include_completed"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public async Task<EsiResponse<List<Job>>> JobsForCorporation(bool include_completed = false, int page = 1)
-            => await Execute<List<Job>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporations/{corporation_id}/industry/jobs/",
+        public async Task<EsiResponse<List<Observer>>> Observers(int page = 1)
+            => await Execute<List<Observer>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporation/{corporation_id}/mining/observers/",
                 replacements: new Dictionary<string, string>()
                 {
                     { "corporation_id", corporation_id.ToString() }
                 },
                 parameters: new string[]
                 {
-                    $"include_completed={include_completed}",
                     $"page={page}"
                 },
                 token: _data.Token);
 
         /// <summary>
-        /// /corporation/{corporation_id}/mining/extractions/
+        /// /industry/systems/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<List<Extraction>>> Extractions()
-            => await Execute<List<Extraction>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporation/{corporation_id}/mining/extractions/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "corporation_id", corporation_id.ToString() }
-                },
-                token: _data.Token);
+        public async Task<EsiResponse<List<SolarSystem>>> SolarSystemCostIndices()
+            => await Execute<List<SolarSystem>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/industry/systems/");
     }
 }

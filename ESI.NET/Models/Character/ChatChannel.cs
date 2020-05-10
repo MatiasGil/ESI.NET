@@ -4,6 +4,15 @@ using System.Collections.Generic;
 
 namespace ESI.NET.Models.Character
 {
+    public class ChannelUser
+    {
+        [JsonProperty("accessor_type")]
+        public string AccessorType { get; set; }
+
+        [JsonProperty("accessor_id")]
+        public long Id { get; set; }
+    }
+
     public class ChatChannel
     {
         [JsonProperty("allowed")]
@@ -12,14 +21,14 @@ namespace ESI.NET.Models.Character
         [JsonProperty("blocked")]
         public List<DeniedUser> Blocked { get; set; } = new List<DeniedUser>();
 
-        [JsonProperty("channel_id")]
-        public long Id { get; set; }
-
         [JsonProperty("comparison_key")]
         public string ComparisonKey { get; set; }
 
         [JsonProperty("has_password")]
         public bool HasPassword { get; set; }
+
+        [JsonProperty("channel_id")]
+        public long Id { get; set; }
 
         [JsonProperty("motd")]
         public string MOTD { get; set; }
@@ -35,16 +44,6 @@ namespace ESI.NET.Models.Character
 
         [JsonProperty("owner_id")]
         public long OwnerId { get; set; }
-    }
-
-
-    public class ChannelUser
-    {
-        [JsonProperty("accessor_id")]
-        public long Id { get; set; }
-
-        [JsonProperty("accessor_type")]
-        public string AccessorType { get; set; }
     }
 
     public class DeniedUser : ChannelUser

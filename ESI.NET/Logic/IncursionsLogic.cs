@@ -11,7 +11,10 @@ namespace ESI.NET.Logic
         private readonly HttpClient _client;
         private readonly EsiConfig _config;
 
-        public IncursionsLogic(HttpClient client, EsiConfig config) { _client = client; _config = config; }
+        public IncursionsLogic(HttpClient client, EsiConfig config)
+        {
+            _client = client; _config = config;
+        }
 
         /// <summary>
         /// /incursions/

@@ -4,11 +4,11 @@ namespace ESI.NET.Models.Assets
 {
     public class Item
     {
-        [JsonProperty("is_singleton")]
-        public bool IsSingleton { get; set; }
-
         [JsonProperty("item_id")]
         public string Id { get; set; }
+
+        [JsonProperty("is_singleton")]
+        public bool IsSingleton { get; set; }
 
         [JsonProperty("location_flag")]
         public string Location { get; set; }

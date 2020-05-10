@@ -28,16 +28,6 @@ namespace ESI.NET.Logic
         }
 
         /// <summary>
-        /// /characters/{character_id}/wallet/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<decimal>> CharacterWallet()
-            => await Execute<decimal>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/wallet/", replacements: new Dictionary<string, string>()
-            {
-                { "character_id", character_id.ToString() }
-            }, token: _data.Token);
-
-        /// <summary>
         /// /characters/{character_id}/wallet/journal/
         /// </summary>
         /// <param name="from_id"></param>
@@ -53,7 +43,6 @@ namespace ESI.NET.Logic
                     $"page={page}"
                 },
                 token: _data.Token);
-
 
         /// <summary>
         /// /characters/{character_id}/wallet/transactions/
@@ -73,16 +62,14 @@ namespace ESI.NET.Logic
                 token: _data.Token);
 
         /// <summary>
-        /// /corporations/{corporation_id}/wallets/
+        /// /characters/{character_id}/wallet/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<List<Wallet>>> CorporationWallets()
-            => await Execute<List<Wallet>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporations/{corporation_id}/wallets/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "corporation_id", corporation_id.ToString() }
-                },
-                token: _data.Token);
+        public async Task<EsiResponse<decimal>> CharacterWallet()
+            => await Execute<decimal>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/wallet/", replacements: new Dictionary<string, string>()
+            {
+                { "character_id", character_id.ToString() }
+            }, token: _data.Token);
 
         /// <summary>
         /// /corporations/{corporation_id}/wallets/{division}/journal/
@@ -119,6 +106,18 @@ namespace ESI.NET.Logic
                 parameters: new string[]
                 {
                     $"page={page}"
+                },
+                token: _data.Token);
+
+        /// <summary>
+        /// /corporations/{corporation_id}/wallets/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<Wallet>>> CorporationWallets()
+            => await Execute<List<Wallet>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporations/{corporation_id}/wallets/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "corporation_id", corporation_id.ToString() }
                 },
                 token: _data.Token);
     }

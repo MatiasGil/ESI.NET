@@ -1,6 +1,6 @@
-﻿using System.Net.Http;
+﻿using ESI.NET.Models.SSO;
+using System.Net.Http;
 using System.Threading.Tasks;
-using ESI.NET.Models.SSO;
 using static ESI.NET.EsiRequest;
 
 namespace ESI.NET.Logic
@@ -17,19 +17,6 @@ namespace ESI.NET.Logic
             _config = config;
             _data = data;
         }
-
-        /// <summary>
-        /// /ui/openwindow/marketdetails/
-        /// </summary>
-        /// <param name="type_id"></param>
-        /// <returns></returns>
-        public async Task<EsiResponse<string>> MarketDetails(int type_id)
-            => await Execute<string>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Post, "/ui/openwindow/marketdetails/",
-                parameters: new string[]
-                {
-                    $"type_id={type_id}"
-                },
-                token: _data.Token);
 
         /// <summary>
         /// /ui/openwindow/contract/
@@ -58,19 +45,15 @@ namespace ESI.NET.Logic
                 token: _data.Token);
 
         /// <summary>
-        /// /ui/autopilot/waypoint/
+        /// /ui/openwindow/marketdetails/
         /// </summary>
-        /// <param name="destination_id"></param>
-        /// <param name="add_to_beginning"></param>
-        /// <param name="clear_other_waypoints"></param>
+        /// <param name="type_id"></param>
         /// <returns></returns>
-        public async Task<EsiResponse<string>> Waypoint(long destination_id, bool add_to_beginning = false, bool clear_other_waypoints = false)
-            => await Execute<string>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Post, "/ui/autopilot/waypoint/",
+        public async Task<EsiResponse<string>> MarketDetails(int type_id)
+            => await Execute<string>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Post, "/ui/openwindow/marketdetails/",
                 parameters: new string[]
                 {
-                    $"destination_id={destination_id}",
-                    $"add_to_beginning={add_to_beginning}",
-                    $"clear_other_waypoints={clear_other_waypoints}"
+                    $"type_id={type_id}"
                 },
                 token: _data.Token);
 
@@ -90,6 +73,23 @@ namespace ESI.NET.Logic
                     subject,
                     body,
                     recipients
+                },
+                token: _data.Token);
+
+        /// <summary>
+        /// /ui/autopilot/waypoint/
+        /// </summary>
+        /// <param name="destination_id"></param>
+        /// <param name="add_to_beginning"></param>
+        /// <param name="clear_other_waypoints"></param>
+        /// <returns></returns>
+        public async Task<EsiResponse<string>> Waypoint(long destination_id, bool add_to_beginning = false, bool clear_other_waypoints = false)
+            => await Execute<string>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Post, "/ui/autopilot/waypoint/",
+                parameters: new string[]
+                {
+                    $"destination_id={destination_id}",
+                    $"add_to_beginning={add_to_beginning}",
+                    $"clear_other_waypoints={clear_other_waypoints}"
                 },
                 token: _data.Token);
     }

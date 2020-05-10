@@ -4,6 +4,21 @@ using System.Collections.Generic;
 
 namespace ESI.NET.Models.Character
 {
+    public class GraphicLayer
+    {
+        [JsonProperty("color")]
+        public int Color { get; set; }
+
+        [JsonProperty("graphic")]
+        public string Graphic { get; set; }
+
+        [JsonProperty("layer")]
+        public int Layer { get; set; }
+
+        [JsonProperty("part")]
+        public int Part { get; set; }
+    }
+
     public class Medal
     {
         [JsonProperty("corporation_id")]
@@ -18,11 +33,11 @@ namespace ESI.NET.Models.Character
         [JsonProperty("graphics")]
         public List<GraphicLayer> Graphics { get; set; } = new List<GraphicLayer>();
 
-        [JsonProperty("issuer_id")]
-        public long IssuerId { get; set; }
-
         [JsonProperty("medal_id")]
         public long Id { get; set; }
+
+        [JsonProperty("issuer_id")]
+        public long IssuerId { get; set; }
 
         [JsonProperty("reason")]
         public string Reason { get; set; }
@@ -32,20 +47,5 @@ namespace ESI.NET.Models.Character
 
         [JsonProperty("title")]
         public string Title { get; set; }
-    }
-
-    public class GraphicLayer
-    {
-        [JsonProperty("color")]
-        public int Color { get; set; }
-
-        [JsonProperty("graphic")]
-        public string Graphic { get; set; }
-
-        [JsonProperty("layer")]
-        public int Layer { get; set; }
-
-        [JsonProperty("part")]
-        public int Part { get; set; }
     }
 }

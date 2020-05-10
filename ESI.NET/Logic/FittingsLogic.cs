@@ -27,18 +27,6 @@ namespace ESI.NET.Logic
         /// <summary>
         /// /characters/{character_id}/fittings/
         /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<Fitting>>> List()
-            => await Execute<List<Fitting>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/fittings/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "character_id", character_id.ToString() }
-                },
-                token: _data.Token);
-
-        /// <summary>
-        /// /characters/{character_id}/fittings/
-        /// </summary>
         /// <param name="fitting"></param>
         /// <returns></returns>
         public async Task<EsiResponse<NewFitting>> Add(object fitting)
@@ -61,6 +49,18 @@ namespace ESI.NET.Logic
                 {
                     { "character_id", character_id.ToString() },
                     { "fitting_id", fitting_id.ToString() }
+                },
+                token: _data.Token);
+
+        /// <summary>
+        /// /characters/{character_id}/fittings/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<Fitting>>> List()
+            => await Execute<List<Fitting>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/fittings/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "character_id", character_id.ToString() }
                 },
                 token: _data.Token);
     }

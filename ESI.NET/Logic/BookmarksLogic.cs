@@ -28,22 +28,6 @@ namespace ESI.NET.Logic
         }
 
         /// <summary>
-        /// /characters/{character_id}/bookmarks/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<Bookmark>>> ForCharacter(int page = 1)
-            => await Execute<List<Bookmark>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/bookmarks/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "character_id", character_id.ToString() }
-                },
-                parameters: new string[]
-                {
-                    $"page={page}"
-                },
-                token: _data.Token);
-
-        /// <summary>
         /// /characters/{character_id}/bookmarks/folders/
         /// </summary>
         /// <returns></returns>
@@ -60,11 +44,11 @@ namespace ESI.NET.Logic
                 token: _data.Token);
 
         /// <summary>
-        /// /corporations/{corporation_id}/bookmarks/
+        /// /corporations/{corporation_id}/bookmarks/folders/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<List<Bookmark>>> ForCorporation(int page = 1)
-            => await Execute<List<Bookmark>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporations/{corporation_id}/bookmarks/",
+        public async Task<EsiResponse<List<Folder>>> FoldersForCorporation(int page = 1)
+            => await Execute<List<Folder>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporations/{corporation_id}/bookmarks/folders/",
                 replacements: new Dictionary<string, string>()
                 {
                     { "corporation_id", corporation_id.ToString() }
@@ -76,11 +60,27 @@ namespace ESI.NET.Logic
                 token: _data.Token);
 
         /// <summary>
-        /// /corporations/{corporation_id}/bookmarks/folders/
+        /// /characters/{character_id}/bookmarks/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<List<Folder>>> FoldersForCorporation(int page = 1)
-            => await Execute<List<Folder>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporations/{corporation_id}/bookmarks/folders/",
+        public async Task<EsiResponse<List<Bookmark>>> ForCharacter(int page = 1)
+            => await Execute<List<Bookmark>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/bookmarks/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "character_id", character_id.ToString() }
+                },
+                parameters: new string[]
+                {
+                    $"page={page}"
+                },
+                token: _data.Token);
+
+        /// <summary>
+        /// /corporations/{corporation_id}/bookmarks/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<Bookmark>>> ForCorporation(int page = 1)
+            => await Execute<List<Bookmark>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/corporations/{corporation_id}/bookmarks/",
                 replacements: new Dictionary<string, string>()
                 {
                     { "corporation_id", corporation_id.ToString() }

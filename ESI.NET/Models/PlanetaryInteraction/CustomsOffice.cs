@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace ESI.NET.Models.PlanetaryInteraction
 {
@@ -26,11 +25,11 @@ namespace ESI.NET.Models.PlanetaryInteraction
         [JsonProperty("good_standing_tax_rate")]
         public int GoodStandingTaxRate { get; set; }
 
-        [JsonProperty("neutral_standing_tax_rate")]
-        public decimal NeutralStandingTaxRate { get; set; }
-
         [JsonProperty("office_id")]
         public long Id { get; set; }
+
+        [JsonProperty("neutral_standing_tax_rate")]
+        public decimal NeutralStandingTaxRate { get; set; }
 
         [JsonProperty("reinforce_exit_end")]
         public int ReinforceExitEnd { get; set; }

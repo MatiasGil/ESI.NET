@@ -24,6 +24,5 @@ namespace ESI.NET.Models.Alliance
 
         [JsonProperty("ticker")]
         public string Ticker { get; set; }
-
     }
 }

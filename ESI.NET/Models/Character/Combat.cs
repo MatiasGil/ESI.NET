@@ -265,14 +265,14 @@ namespace ESI.NET.Models.Character
         [JsonProperty("self_destructs")]
         public long SelfDestructs { get; set; }
 
-        [JsonProperty("warp_scramble_pc")]
-        public long WarpScramblePc { get; set; }
-
         [JsonProperty("warp_scrambledby_npc")]
         public long WarpScrambledbyNpc { get; set; }
 
         [JsonProperty("warp_scrambledby_pc")]
         public long WarpScrambledbyPc { get; set; }
+
+        [JsonProperty("warp_scramble_pc")]
+        public long WarpScramblePc { get; set; }
 
         [JsonProperty("weapon_flag_set")]
         public long WeaponFlagSet { get; set; }

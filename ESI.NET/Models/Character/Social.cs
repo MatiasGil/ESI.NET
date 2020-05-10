@@ -19,9 +19,6 @@ namespace ESI.NET.Models.Character
         [JsonProperty("add_contact_neutral")]
         public long AddContactNeutral { get; set; }
 
-        [JsonProperty("add_note")]
-        public long AddNote { get; set; }
-
         [JsonProperty("added_as_contact_bad")]
         public long AddedAsContactBad { get; set; }
 
@@ -36,6 +33,9 @@ namespace ESI.NET.Models.Character
 
         [JsonProperty("added_as_contact_neutral")]
         public long AddedAsContactNeutral { get; set; }
+
+        [JsonProperty("add_note")]
+        public long AddNote { get; set; }
 
         [JsonProperty("calendar_event_created")]
         public long CalendarEventCreated { get; set; }

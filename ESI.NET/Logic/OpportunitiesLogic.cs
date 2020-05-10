@@ -13,7 +13,7 @@ namespace ESI.NET.Logic
         private readonly EsiConfig _config;
         private readonly AuthorizedCharacterData _data;
         private readonly int character_id;
-        
+
         public OpportunitiesLogic(HttpClient client, EsiConfig config, AuthorizedCharacterData data = null)
         {
             _client = client;
@@ -25,11 +25,17 @@ namespace ESI.NET.Logic
         }
 
         /// <summary>
-        /// /opportunities/groups/
+        /// /characters/{character_id}/opportunities/
         /// </summary>
+        /// <param name="character_id"></param>
         /// <returns></returns>
-        public async Task<EsiResponse<List<int>>> Groups()
-            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/opportunities/groups/");
+        public async Task<EsiResponse<List<model.CompletedTask>>> CompletedTasks()
+            => await Execute<List<model.CompletedTask>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/opportunities/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "character_id", character_id.ToString() }
+                },
+                token: _data.Token);
 
         /// <summary>
         /// /opportunities/groups/{group_id}/
@@ -44,11 +50,11 @@ namespace ESI.NET.Logic
                 });
 
         /// <summary>
-        /// /opportunities/tasks/
+        /// /opportunities/groups/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<List<int>>> Tasks()
-            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/opportunities/tasks/");
+        public async Task<EsiResponse<List<int>>> Groups()
+            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/opportunities/groups/");
 
         /// <summary>
         /// /opportunities/tasks/{task_id}/
@@ -63,16 +69,10 @@ namespace ESI.NET.Logic
                 });
 
         /// <summary>
-        /// /characters/{character_id}/opportunities/
+        /// /opportunities/tasks/
         /// </summary>
-        /// <param name="character_id"></param>
         /// <returns></returns>
-        public async Task<EsiResponse<List<model.CompletedTask>>> CompletedTasks()
-            => await Execute<List<model.CompletedTask>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/opportunities/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "character_id", character_id.ToString() }
-                },
-                token: _data.Token);
+        public async Task<EsiResponse<List<int>>> Tasks()
+            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/opportunities/tasks/");
     }
 }

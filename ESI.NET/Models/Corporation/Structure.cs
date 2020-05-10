@@ -5,6 +5,15 @@ using System.Collections.Generic;
 
 namespace ESI.NET.Models.Corporation
 {
+    public class Service
+    {
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("state")]
+        public StructureServiceState State { get; set; }
+    }
+
     public class Structure
     {
         [JsonProperty("corporation_id")]
@@ -54,14 +63,5 @@ namespace ESI.NET.Models.Corporation
 
         [JsonProperty("unanchors_at")]
         public DateTime UnanchorsAt { get; set; }
-    }
-
-    public class Service
-    {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("state")]
-        public StructureServiceState State { get; set; }
     }
 }

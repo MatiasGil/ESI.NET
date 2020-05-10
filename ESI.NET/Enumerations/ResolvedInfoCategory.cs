@@ -1,5 +1,5 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace ESI.NET.Enumerations
 {
@@ -16,6 +16,5 @@ namespace ESI.NET.Enumerations
         [EnumMember(Value = "station")] Station,
         [EnumMember(Value = "faction")] Faction,
         [EnumMember(Value = "structure")] Structure
-
     }
 }

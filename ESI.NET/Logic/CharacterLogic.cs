@@ -35,30 +35,6 @@ namespace ESI.NET.Logic
                 body: character_ids);
 
         /// <summary>
-        /// /characters/names/
-        /// </summary>
-        /// <param name="characterIds"></param>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<Character>>> Names(int[] character_ids)
-            => await Execute<List<Character>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/characters/names/",
-                parameters: new string[]
-                {
-                    $"character_ids={string.Join(",", character_ids)}"
-                });
-
-        /// <summary>
-        /// /characters/{character_id}/
-        /// </summary>
-        /// <param name="character_id"></param>
-        /// <returns></returns>
-        public async Task<EsiResponse<Information>> Information(int character_id)
-            => await Execute<Information>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/characters/{character_id}/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "character_id", character_id.ToString() }
-                });
-
-        /// <summary>
         /// /characters/{character_id}/agents_research/
         /// </summary>
         /// <returns></returns>
@@ -87,11 +63,37 @@ namespace ESI.NET.Logic
                 });
 
         /// <summary>
+        /// /characters/{character_id}/cspa/
+        /// </summary>
+        /// <param name="character_ids">The target characters to calculate the charge for</param>
+        /// <returns></returns>
+        public async Task<EsiResponse<Cspa>> CalculateCSPA(object character_ids)
+            => await Execute<Cspa>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Post, "/characters/{character_id}/cspa/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "character_id", character_id.ToString() }
+                },
+                body: character_ids,
+                token: _data.Token);
+
+        /// <summary>
         /// /characters/{character_id}/chat_channels/
         /// </summary>
         /// <returns></returns>
         public async Task<EsiResponse<List<ChatChannel>>> ChatChannels()
             => await Execute<List<ChatChannel>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/chat_channels/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "character_id", character_id.ToString() }
+                },
+                token: _data.Token);
+
+        /// <summary>
+        /// /characters/{character_id}/notifications/contacts/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<ContactNotification>>> ContactNotifications()
+            => await Execute<List<ContactNotification>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/notifications/contacts/",
                 replacements: new Dictionary<string, string>()
                 {
                     { "character_id", character_id.ToString() }
@@ -111,20 +113,6 @@ namespace ESI.NET.Logic
                 });
 
         /// <summary>
-        /// /characters/{character_id}/cspa/
-        /// </summary>
-        /// <param name="character_ids">The target characters to calculate the charge for</param>
-        /// <returns></returns>
-        public async Task<EsiResponse<Cspa>> CalculateCSPA(object character_ids)
-            => await Execute<Cspa>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Post, "/characters/{character_id}/cspa/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "character_id", character_id.ToString() }
-                },
-                body: character_ids,
-                token: _data.Token);
-
-        /// <summary>
         /// /characters/{character_id}/fatigue/
         /// </summary>
         /// <returns></returns>
@@ -135,6 +123,18 @@ namespace ESI.NET.Logic
                     { "character_id", character_id.ToString() }
                 },
                 token: _data.Token);
+
+        /// <summary>
+        /// /characters/{character_id}/
+        /// </summary>
+        /// <param name="character_id"></param>
+        /// <returns></returns>
+        public async Task<EsiResponse<Information>> Information(int character_id)
+            => await Execute<Information>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/characters/{character_id}/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "character_id", character_id.ToString() }
+                });
 
         /// <summary>
         /// /characters/{character_id}/medals/
@@ -149,23 +149,23 @@ namespace ESI.NET.Logic
                 token: _data.Token);
 
         /// <summary>
+        /// /characters/names/
+        /// </summary>
+        /// <param name="characterIds"></param>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<Character>>> Names(int[] character_ids)
+            => await Execute<List<Character>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/characters/names/",
+                parameters: new string[]
+                {
+                    $"character_ids={string.Join(",", character_ids)}"
+                });
+
+        /// <summary>
         /// /characters/{character_id}/notifications/
         /// </summary>
         /// <returns></returns>
         public async Task<EsiResponse<List<Notification>>> Notifications()
             => await Execute<List<Notification>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/notifications/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "character_id", character_id.ToString() }
-                },
-                token: _data.Token);
-
-        /// <summary>
-        /// /characters/{character_id}/notifications/contacts/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<ContactNotification>>> ContactNotifications()
-            => await Execute<List<ContactNotification>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/notifications/contacts/",
                 replacements: new Dictionary<string, string>()
                 {
                     { "character_id", character_id.ToString() }

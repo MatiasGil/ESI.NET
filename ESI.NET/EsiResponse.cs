@@ -10,6 +10,46 @@ namespace ESI.NET
 {
     public class EsiResponse<T>
     {
+        private readonly ImmutableDictionary<string, string> _noContentMessage = new Dictionary<string, string>()
+        {
+            //Calendar
+            {"Put|/characters/{character_id}/calendar/{event_id}/", "Event updated"},
+
+            //Contacts
+            {"Put|/characters/{character_id}/contacts/", "Contacts updated"},
+            {"Delete|/characters/{character_id}/contacts/", "Contacts deleted"},
+
+            //Corporations
+            {"Put|/corporations/{corporation_id}/structures/{structure_id}/", "Structure vulnerability window updated"},
+
+            //Fittings
+            {"Delete|/characters/{character_id}/fittings/{fitting_id}/", ""},
+
+            //Fleets
+            {"Put|/fleets/{fleet_id}/", "Fleet updated"},
+            {"Post|/fleets/{fleet_id}/members/", "Fleet invitation sent"},
+            {"Delete|/fleets/{fleet_id}/members/{member_id}/", "Fleet member kicked"},
+            {"Put|/fleets/{fleet_id}/members/{member_id}/", "Fleet invitation sent"},
+            {"Delete|/fleets/{fleet_id}/wings/{wing_id}/", "Wing deleted"},
+            {"Put|/fleets/{fleet_id}/wings/{wing_id}/", "Wing renamed"},
+            {"Delete|/fleets/{fleet_id}/squads/{squad_id}/", "Squad deleted"},
+            {"Put|/fleets/{fleet_id}/squads/{squad_id}/", "Squad renamed"},
+
+            //Mail
+            {"Post|/characters/{character_id}/mail/", "Mail created"},
+            {"Post|/characters/{character_id}/mail/labels/", "Label created"},
+            {"Delete|/characters/{character_id}/mail/labels/{label_id}/", "Label deleted"},
+            {"Put|/characters/{character_id}/mail/{mail_id}/", "Mail updated"},
+            {"Delete|/characters/{character_id}/mail/{mail_id}/", "Mail deleted"},
+
+            //User Interface
+            {"Post|/ui/openwindow/marketdetails/", "Open window request received"},
+            {"Post|/ui/openwindow/contract/", "Open window request received"},
+            {"Post|/ui/openwindow/information/", "Open window request received"},
+            {"Post|/ui/autopilot/waypoint/", "Open window request received"},
+            {"Post|/ui/openwindow/newmail/", "Open window request received"}
+        }.ToImmutableDictionary();
+
         public EsiResponse(HttpResponseMessage response, string path, string version)
         {
             try
@@ -58,68 +98,26 @@ namespace ESI.NET
                 }
                 else if (response.StatusCode == HttpStatusCode.NoContent)
                     Message = _noContentMessage[path];
-
             }
             catch (Exception ex)
             {
                 Message = response.Content.ReadAsStringAsync().Result;
                 Exception = ex;
             }
-            
         }
 
-        public Guid RequestId { get; set; }
-        public HttpStatusCode StatusCode { get; set; }
+        public T Data { get; set; }
         public string Endpoint { get; set; }
-        public string Version { get; set; }
-        public DateTime? Expires { get; set; }
-        public DateTime? LastModified { get; set; }
-        public string ETag { get; set; }
         public int? ErrorLimitRemain { get; set; }
         public int? ErrorLimitReset { get; set; }
-        public int? Pages { get; set; }
-        public string Message { get; set; }
-        public T Data { get; set; }
+        public string ETag { get; set; }
         public Exception Exception { get; set; }
-
-        private readonly ImmutableDictionary<string, string> _noContentMessage = new Dictionary<string, string>()
-        {
-            //Calendar
-            {"Put|/characters/{character_id}/calendar/{event_id}/", "Event updated"},
-
-            //Contacts
-            {"Put|/characters/{character_id}/contacts/", "Contacts updated"},
-            {"Delete|/characters/{character_id}/contacts/", "Contacts deleted"},
-
-            //Corporations
-            {"Put|/corporations/{corporation_id}/structures/{structure_id}/", "Structure vulnerability window updated"},
-
-            //Fittings
-            {"Delete|/characters/{character_id}/fittings/{fitting_id}/", ""},
-
-            //Fleets
-            {"Put|/fleets/{fleet_id}/", "Fleet updated"},
-            {"Post|/fleets/{fleet_id}/members/", "Fleet invitation sent"},
-            {"Delete|/fleets/{fleet_id}/members/{member_id}/", "Fleet member kicked"},
-            {"Put|/fleets/{fleet_id}/members/{member_id}/", "Fleet invitation sent"},
-            {"Delete|/fleets/{fleet_id}/wings/{wing_id}/", "Wing deleted"},
-            {"Put|/fleets/{fleet_id}/wings/{wing_id}/", "Wing renamed"},
-            {"Delete|/fleets/{fleet_id}/squads/{squad_id}/", "Squad deleted"},
-            {"Put|/fleets/{fleet_id}/squads/{squad_id}/", "Squad renamed"},
-
-            //Mail
-            {"Post|/characters/{character_id}/mail/", "Mail created"},
-            {"Post|/characters/{character_id}/mail/labels/", "Label created"},
-            {"Delete|/characters/{character_id}/mail/labels/{label_id}/", "Label deleted"},
-            {"Put|/characters/{character_id}/mail/{mail_id}/", "Mail updated"},
-            {"Delete|/characters/{character_id}/mail/{mail_id}/", "Mail deleted"},
-
-            //User Interface
-            {"Post|/ui/openwindow/marketdetails/", "Open window request received"},
-            {"Post|/ui/openwindow/contract/", "Open window request received"},
-            {"Post|/ui/openwindow/information/", "Open window request received"},
-            {"Post|/ui/autopilot/waypoint/", "Open window request received"},
-            {"Post|/ui/openwindow/newmail/", "Open window request received"}
-        }.ToImmutableDictionary();
+        public DateTime? Expires { get; set; }
+        public DateTime? LastModified { get; set; }
+        public string Message { get; set; }
+        public int? Pages { get; set; }
+        public Guid RequestId { get; set; }
+        public HttpStatusCode StatusCode { get; set; }
+        public string Version { get; set; }
     }
 }

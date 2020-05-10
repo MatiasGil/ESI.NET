@@ -4,9 +4,6 @@ namespace ESI.NET.Models.Universe
 {
     public class Bloodline
     {
-        [JsonProperty("bloodline_id")]
-        public long Id { get; set; }
-
         [JsonProperty("charisma")]
         public int Charisma { get; set; }
 
@@ -15,6 +12,9 @@ namespace ESI.NET.Models.Universe
 
         [JsonProperty("description")]
         public string Description { get; set; }
+
+        [JsonProperty("bloodline_id")]
+        public long Id { get; set; }
 
         [JsonProperty("intelligence")]
         public int Intelligence { get; set; }
@@ -36,6 +36,5 @@ namespace ESI.NET.Models.Universe
 
         [JsonProperty("willpower")]
         public int Willpower { get; set; }
-
     }
 }

@@ -3,15 +3,6 @@ using System.Collections.Generic;
 
 namespace ESI.NET.Models.Industry
 {
-    public class SolarSystem
-    {
-        [JsonProperty("solar_system_id")]
-        public int SolarSystemId { get; set; }
-
-        [JsonProperty("cost_indices")]
-        public List<CostIndice> CostIndices { get; set; } = new List<CostIndice>();
-    }
-
     public class CostIndice
     {
         [JsonProperty("activity")]
@@ -19,5 +10,14 @@ namespace ESI.NET.Models.Industry
 
         [JsonProperty("cost_index")]
         public decimal CostIndex { get; set; }
+    }
+
+    public class SolarSystem
+    {
+        [JsonProperty("cost_indices")]
+        public List<CostIndice> CostIndices { get; set; } = new List<CostIndice>();
+
+        [JsonProperty("solar_system_id")]
+        public int SolarSystemId { get; set; }
     }
 }

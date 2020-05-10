@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ESI.NET.Models.Dogma
 {
-    class DynamicItem
+    internal class DynamicItem
     {
         [JsonProperty("created_by")]
         public int CreatedBy { get; set; }

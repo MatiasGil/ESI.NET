@@ -5,11 +5,11 @@ namespace ESI.NET.Models.Character
 {
     public class ContactNotification
     {
-        [JsonProperty("message")]
-        public string Message { get; set; }
-
         [JsonProperty("notification_id")]
         public long Id { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
 
         [JsonProperty("send_date")]
         public DateTime SendDate { get; set; }

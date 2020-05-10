@@ -3,6 +3,24 @@ using System.Collections.Generic;
 
 namespace ESI.NET.Models.Universe
 {
+    public class Attribute
+    {
+        [JsonProperty("attribute_id")]
+        public int AttributeId { get; set; }
+
+        [JsonProperty("value")]
+        public float Value { get; set; }
+    }
+
+    public class Effect
+    {
+        [JsonProperty("effect_id")]
+        public int EffectId { get; set; }
+
+        [JsonProperty("is_default")]
+        public bool IsDefault { get; set; }
+    }
+
     public class Type
     {
         [JsonProperty("capacity")]
@@ -52,23 +70,5 @@ namespace ESI.NET.Models.Universe
 
         [JsonProperty("volume")]
         public float Volume { get; set; }
-    }
-
-    public class Attribute
-    {
-        [JsonProperty("attribute_id")]
-        public int AttributeId { get; set; }
-
-        [JsonProperty("value")]
-        public float Value { get; set; }
-    }
-
-    public class Effect
-    {
-        [JsonProperty("effect_id")]
-        public int EffectId { get; set; }
-
-        [JsonProperty("is_default")]
-        public bool IsDefault { get; set; }
     }
 }

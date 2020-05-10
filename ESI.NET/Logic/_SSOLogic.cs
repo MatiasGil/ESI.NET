@@ -1,5 +1,4 @@
 ﻿using ESI.NET.Enumerations;
-using ESI.NET.Logic;
 using ESI.NET.Models.Character;
 using ESI.NET.Models.SSO;
 using Newtonsoft.Json;

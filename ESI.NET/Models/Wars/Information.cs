@@ -4,37 +4,13 @@ using System.Collections.Generic;
 
 namespace ESI.NET.Models.Wars
 {
-    public class Information
+    public class Ally
     {
-        [JsonProperty("aggressor")]
-        public Combatant Agressor { get; set; }
+        [JsonProperty("alliance_id")]
+        public int AllianceId { get; set; }
 
-        [JsonProperty("declared")]
-        public DateTime DateDeclared { get; set; }
-
-        [JsonProperty("defender")]
-        public Combatant Defender { get; set; }
-
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("mutual")]
-        public bool IsMutual { get; set; }
-
-        [JsonProperty("open_for_allies")]
-        public bool IsOpenForAllies { get; set; }
-
-        [JsonProperty("allies")]
-        public List<Ally> Allies { get; set; } = new List<Ally>();
-
-        [JsonProperty("finished")]
-        public string Fin { get; set; }
-
-        [JsonProperty("retracted")]
-        public DateTime Retracted { get; set; }
-
-        [JsonProperty("started")]
-        public DateTime Started { get; set; }
+        [JsonProperty("corporation_id")]
+        public int CorporationId { get; set; }
     }
 
     public class Combatant
@@ -49,12 +25,36 @@ namespace ESI.NET.Models.Wars
         public int ShipsKilled { get; set; }
     }
 
-    public class Ally
+    public class Information
     {
-        [JsonProperty("alliance_id")]
-        public int AllianceId { get; set; }
+        [JsonProperty("aggressor")]
+        public Combatant Agressor { get; set; }
 
-        [JsonProperty("corporation_id")]
-        public int CorporationId { get; set; }
+        [JsonProperty("allies")]
+        public List<Ally> Allies { get; set; } = new List<Ally>();
+
+        [JsonProperty("declared")]
+        public DateTime DateDeclared { get; set; }
+
+        [JsonProperty("defender")]
+        public Combatant Defender { get; set; }
+
+        [JsonProperty("finished")]
+        public string Fin { get; set; }
+
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("mutual")]
+        public bool IsMutual { get; set; }
+
+        [JsonProperty("open_for_allies")]
+        public bool IsOpenForAllies { get; set; }
+
+        [JsonProperty("retracted")]
+        public DateTime Retracted { get; set; }
+
+        [JsonProperty("started")]
+        public DateTime Started { get; set; }
     }
 }

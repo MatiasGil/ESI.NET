@@ -6,13 +6,54 @@ using System.Net.Http;
 
 namespace ESI.NET
 {
+    public interface IEsiClient
+    {
+        AllianceLogic Alliance { get; set; }
+        AssetsLogic Assets { get; set; }
+        BookmarksLogic Bookmarks { get; set; }
+        CalendarLogic Calendar { get; set; }
+        CharacterLogic Character { get; set; }
+        ClonesLogic Clones { get; set; }
+        ContactsLogic Contacts { get; set; }
+        ContractsLogic Contracts { get; set; }
+        CorporationLogic Corporation { get; set; }
+        DogmaLogic Dogma { get; set; }
+        FactionWarfareLogic FactionWarfare { get; set; }
+        FittingsLogic Fittings { get; set; }
+        FleetsLogic Fleets { get; set; }
+        IncursionsLogic Incursions { get; set; }
+        IndustryLogic Industry { get; set; }
+        InsuranceLogic Insurance { get; set; }
+        KillmailsLogic Killmails { get; set; }
+        LocationLogic Location { get; set; }
+        LoyaltyLogic Loyalty { get; set; }
+        MailLogic Mail { get; set; }
+        MarketLogic Market { get; set; }
+        OpportunitiesLogic Opportunities { get; set; }
+        PlanetaryInteractionLogic PlanetaryInteraction { get; set; }
+        RoutesLogic Routes { get; set; }
+        SearchLogic Search { get; set; }
+        SkillsLogic Skills { get; set; }
+        SovereigntyLogic Sovereignty { get; set; }
+        SsoLogic SSO { get; set; }
+        StatusLogic Status { get; set; }
+        UniverseLogic Universe { get; set; }
+        UserInterfaceLogic UserInterface { get; set; }
+        WalletLogic Wallet { get; set; }
+        WarsLogic Wars { get; set; }
+
+        void SetCharacterData(AuthorizedCharacterData data);
+
+        void SetIfNoneMatchHeader(string eTag);
+    }
+
     public class EsiClient : IEsiClient
     {
-        readonly HttpClient client;
-        readonly EsiConfig config;
+        private readonly HttpClient client;
+        private readonly EsiConfig config;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="config"></param>
         public EsiClient(IOptions<EsiConfig> _config)
@@ -61,7 +102,6 @@ namespace ESI.NET
             Wars = new WarsLogic(client, config);
         }
 
-        public SsoLogic SSO { get; set; }
         public AllianceLogic Alliance { get; set; }
         public AssetsLogic Assets { get; set; }
         public BookmarksLogic Bookmarks { get; set; }
@@ -73,8 +113,8 @@ namespace ESI.NET
         public CorporationLogic Corporation { get; set; }
         public DogmaLogic Dogma { get; set; }
         public FactionWarfareLogic FactionWarfare { get; set; }
-        public FleetsLogic Fleets { get; set; }
         public FittingsLogic Fittings { get; set; }
+        public FleetsLogic Fleets { get; set; }
         public IncursionsLogic Incursions { get; set; }
         public IndustryLogic Industry { get; set; }
         public InsuranceLogic Insurance { get; set; }
@@ -88,13 +128,13 @@ namespace ESI.NET
         public RoutesLogic Routes { get; set; }
         public SearchLogic Search { get; set; }
         public SkillsLogic Skills { get; set; }
-        public StatusLogic Status { get; set; }
         public SovereigntyLogic Sovereignty { get; set; }
+        public SsoLogic SSO { get; set; }
+        public StatusLogic Status { get; set; }
         public UniverseLogic Universe { get; set; }
         public UserInterfaceLogic UserInterface { get; set; }
         public WalletLogic Wallet { get; set; }
         public WarsLogic Wars { get; set; }
-
 
         public void SetCharacterData(AuthorizedCharacterData data)
         {
@@ -126,45 +166,5 @@ namespace ESI.NET
 
         public void SetIfNoneMatchHeader(string eTag)
             => EsiRequest.ETag = eTag;
-    }
-
-    public interface IEsiClient
-    {
-        SsoLogic SSO { get; set; }
-        AllianceLogic Alliance { get; set; }
-        AssetsLogic Assets { get; set; }
-        BookmarksLogic Bookmarks { get; set; }
-        CalendarLogic Calendar { get; set; }
-        CharacterLogic Character { get; set; }
-        ClonesLogic Clones { get; set; }
-        ContactsLogic Contacts { get; set; }
-        ContractsLogic Contracts { get; set; }
-        CorporationLogic Corporation { get; set; }
-        DogmaLogic Dogma { get; set; }
-        FactionWarfareLogic FactionWarfare { get; set; }
-        FittingsLogic Fittings { get; set; }
-        FleetsLogic Fleets { get; set; }
-        IncursionsLogic Incursions { get; set; }
-        IndustryLogic Industry { get; set; }
-        InsuranceLogic Insurance { get; set; }
-        KillmailsLogic Killmails { get; set; }
-        LocationLogic Location { get; set; }
-        LoyaltyLogic Loyalty { get; set; }
-        MailLogic Mail { get; set; }
-        MarketLogic Market { get; set; }
-        OpportunitiesLogic Opportunities { get; set; }
-        PlanetaryInteractionLogic PlanetaryInteraction { get; set; }
-        RoutesLogic Routes { get; set; }
-        SearchLogic Search { get; set; }
-        SkillsLogic Skills { get; set; }
-        SovereigntyLogic Sovereignty { get; set; }
-        StatusLogic Status { get; set; }
-        UniverseLogic Universe { get; set; }
-        UserInterfaceLogic UserInterface { get; set; }
-        WalletLogic Wallet { get; set; }
-        WarsLogic Wars { get; set; }
-
-        void SetCharacterData(AuthorizedCharacterData data);
-        void SetIfNoneMatchHeader(string eTag);
     }
 }

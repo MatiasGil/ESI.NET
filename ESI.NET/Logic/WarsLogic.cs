@@ -10,7 +10,11 @@ namespace ESI.NET.Logic
     {
         private readonly HttpClient _client;
         private readonly EsiConfig _config;
-        public WarsLogic(HttpClient client, EsiConfig config) { _client = client; _config = config; }
+
+        public WarsLogic(HttpClient client, EsiConfig config)
+        {
+            _client = client; _config = config;
+        }
 
         /// <summary>
         /// /wars/

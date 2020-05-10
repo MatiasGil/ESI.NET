@@ -28,6 +28,27 @@ namespace ESI.NET.Logic
         }
 
         /// <summary>
+        /// fw/leaderboards/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<Leaderboards<FactionTotal>>> Leaderboads()
+            => await Execute<Leaderboards<FactionTotal>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/fw/leaderboards/");
+
+        /// <summary>
+        /// /fw/leaderboards/characters/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<Leaderboards<CharacterTotal>>> LeaderboardsForCharacters()
+            => await Execute<Leaderboards<CharacterTotal>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/fw/leaderboards/characters/");
+
+        /// <summary>
+        /// /fw/leaderboards/corporations/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<Leaderboards<CorporationTotal>>> LeaderboardsForCorporations()
+            => await Execute<Leaderboards<CorporationTotal>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/fw/leaderboards/corporations/");
+
+        /// <summary>
         /// /fw/wars/
         /// </summary>
         /// <returns></returns>
@@ -42,32 +63,16 @@ namespace ESI.NET.Logic
             => await Execute<List<Stat>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/fw/stats/");
 
         /// <summary>
-        /// /fw/systems/
+        /// /characters/{character_id}/fw/stats/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<List<FactionWarfareSystem>>> Systems()
-            => await Execute<List<FactionWarfareSystem>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/fw/systems/");
-
-        /// <summary>
-        /// fw/leaderboards/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<Leaderboards<FactionTotal>>> Leaderboads()
-            => await Execute<Leaderboards<FactionTotal>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/fw/leaderboards/");
-
-        /// <summary>
-        /// /fw/leaderboards/corporations/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<Leaderboards<CorporationTotal>>> LeaderboardsForCorporations()
-            => await Execute<Leaderboards<CorporationTotal>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/fw/leaderboards/corporations/");
-
-        /// <summary>
-        /// /fw/leaderboards/characters/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<Leaderboards<CharacterTotal>>> LeaderboardsForCharacters()
-            => await Execute<Leaderboards<CharacterTotal>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/fw/leaderboards/characters/");
+        public async Task<EsiResponse<Stat>> StatsForCharacter()
+            => await Execute<Stat>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/fw/stats/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "character_id", character_id.ToString() }
+                },
+                token: _data.Token);
 
         /// <summary>
         /// /corporations/{corporation_id}/fw/stats/
@@ -82,15 +87,10 @@ namespace ESI.NET.Logic
                 token: _data.Token);
 
         /// <summary>
-        /// /characters/{character_id}/fw/stats/
+        /// /fw/systems/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<Stat>> StatsForCharacter()
-            => await Execute<Stat>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/fw/stats/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "character_id", character_id.ToString() }
-                },
-                token: _data.Token);
+        public async Task<EsiResponse<List<FactionWarfareSystem>>> Systems()
+            => await Execute<List<FactionWarfareSystem>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/fw/systems/");
     }
 }

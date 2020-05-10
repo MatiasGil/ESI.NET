@@ -12,7 +12,10 @@ namespace ESI.NET.Logic
         private readonly HttpClient _client;
         private readonly EsiConfig _config;
 
-        public AllianceLogic(HttpClient client, EsiConfig config) { _client = client; _config = config; }
+        public AllianceLogic(HttpClient client, EsiConfig config)
+        {
+            _client = client; _config = config;
+        }
 
         /// <summary>
         /// /alliances/
@@ -20,18 +23,6 @@ namespace ESI.NET.Logic
         /// <returns></returns>
         public async Task<EsiResponse<List<int>>> All()
             => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/alliances/");
-
-        /// <summary>
-        /// /alliances/{alliance_id}/
-        /// </summary>
-        /// <param name="allianceId"></param>
-        /// <returns></returns>
-        public async Task<EsiResponse<Alliance>> Information(int alliance_id)
-            => await Execute<Alliance>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/alliances/{alliance_id}/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "alliance_id", alliance_id.ToString() }
-                });
 
         /// <summary>
         /// /alliances/{alliance_id}/corporations/
@@ -52,6 +43,18 @@ namespace ESI.NET.Logic
         /// <returns></returns>
         public async Task<EsiResponse<Images>> Icons(int alliance_id)
             => await Execute<Images>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/alliances/{alliance_id}/icons/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "alliance_id", alliance_id.ToString() }
+                });
+
+        /// <summary>
+        /// /alliances/{alliance_id}/
+        /// </summary>
+        /// <param name="allianceId"></param>
+        /// <returns></returns>
+        public async Task<EsiResponse<Alliance>> Information(int alliance_id)
+            => await Execute<Alliance>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/alliances/{alliance_id}/",
                 replacements: new Dictionary<string, string>()
                 {
                     { "alliance_id", alliance_id.ToString() }

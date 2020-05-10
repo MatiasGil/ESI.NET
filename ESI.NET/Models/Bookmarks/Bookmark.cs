@@ -7,29 +7,29 @@ namespace ESI.NET.Models.Bookmarks
         [JsonProperty("bookmark_id")]
         public int BookmarkId { get; set; }
 
-        [JsonProperty("folder_id")]
-        public int FolderId { get; set; }
+        [JsonProperty("coordinates")]
+        public Position Coordinates { get; set; }
 
         [JsonProperty("created")]
         public string Created { get; set; }
 
-        [JsonProperty("label")]
-        public string Label { get; set; }
-
-        [JsonProperty("notes")]
-        public string Notes { get; set; }
-
-        [JsonProperty("location_id")]
-        public int LocationId { get; set; }
-
         [JsonProperty("creator_id")]
         public int CreatorId { get; set; }
+
+        [JsonProperty("folder_id")]
+        public int FolderId { get; set; }
 
         [JsonProperty("item")]
         public Item Item { get; set; }
 
-        [JsonProperty("coordinates")]
-        public Position Coordinates { get; set; }
+        [JsonProperty("label")]
+        public string Label { get; set; }
+
+        [JsonProperty("location_id")]
+        public int LocationId { get; set; }
+
+        [JsonProperty("notes")]
+        public string Notes { get; set; }
     }
 
     public class Item

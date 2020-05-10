@@ -3,6 +3,33 @@ using System.Collections.Generic;
 
 namespace ESI.NET.Models.FactionWarfare
 {
+    public class CharacterTotal
+    {
+        [JsonProperty("amount")]
+        public int Amount { get; set; }
+
+        [JsonProperty("character_id")]
+        public int CharacterId { get; set; }
+    }
+
+    public class CorporationTotal
+    {
+        [JsonProperty("amount")]
+        public int Amount { get; set; }
+
+        [JsonProperty("corporation_id")]
+        public int CorporationId { get; set; }
+    }
+
+    public class FactionTotal
+    {
+        [JsonProperty("amount")]
+        public int Amount { get; set; }
+
+        [JsonProperty("faction_id")]
+        public int FactionId { get; set; }
+    }
+
     public class Leaderboards<T>
     {
         [JsonProperty("kills")]
@@ -14,40 +41,13 @@ namespace ESI.NET.Models.FactionWarfare
 
     public class Summary<T>
     {
-        [JsonProperty("yesterday")]
-        public List<T> Yesterday { get; set; } = new List<T>();
+        [JsonProperty("active_total")]
+        public List<T> ActiveTotal { get; set; } = new List<T>();
 
         [JsonProperty("last_week")]
         public List<T> LastWeek { get; set; } = new List<T>();
 
-        [JsonProperty("active_total")]
-        public List<T> ActiveTotal { get; set; } = new List<T>();
-    }
-
-    public class FactionTotal
-    {
-        [JsonProperty("faction_id")]
-        public int FactionId { get; set; }
-
-        [JsonProperty("amount")]
-        public int Amount { get; set; }
-    }
-
-    public class CorporationTotal
-    {
-        [JsonProperty("corporation_id")]
-        public int CorporationId { get; set; }
-
-        [JsonProperty("amount")]
-        public int Amount { get; set; }
-    }
-
-    public class CharacterTotal
-    {
-        [JsonProperty("character_id")]
-        public int CharacterId { get; set; }
-
-        [JsonProperty("amount")]
-        public int Amount { get; set; }
+        [JsonProperty("yesterday")]
+        public List<T> Yesterday { get; set; } = new List<T>();
     }
 }

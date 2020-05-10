@@ -3,6 +3,21 @@ using System.Collections.Generic;
 
 namespace ESI.NET.Models.Skills
 {
+    public class Skill
+    {
+        [JsonProperty("active_skill_level")]
+        public int ActiveSkillLevel { get; set; }
+
+        [JsonProperty("skill_id")]
+        public int SkillId { get; set; }
+
+        [JsonProperty("skillpoints_in_skill")]
+        public long SkillpointsInSkill { get; set; }
+
+        [JsonProperty("trained_skill_level")]
+        public int TrainedSkillLevel { get; set; }
+    }
+
     public class SkillDetails
     {
         [JsonProperty("skills")]
@@ -13,20 +28,5 @@ namespace ESI.NET.Models.Skills
 
         [JsonProperty("unallocated_sp")]
         public int UnallocatedSp { get; set; }
-    }
-
-    public class Skill
-    {
-        [JsonProperty("skill_id")]
-        public int SkillId { get; set; }
-
-        [JsonProperty("skillpoints_in_skill")]
-        public long SkillpointsInSkill { get; set; }
-
-        [JsonProperty("trained_skill_level")]
-        public int TrainedSkillLevel { get; set; }
-
-        [JsonProperty("active_skill_level")]
-        public int ActiveSkillLevel { get; set; }
     }
 }
