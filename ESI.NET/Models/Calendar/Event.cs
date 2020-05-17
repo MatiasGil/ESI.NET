@@ -11,19 +11,6 @@ namespace ESI.NET.Models.Calendar
         [JsonProperty("duration")]
         public int Duration { get; set; }
 
-        [JsonProperty("event_date")]
-        public DateTime EventDate
-        {
-            get
-            {
-                return Date;
-            }
-            set
-            {
-                Date = value;
-            }
-        }
-
         [JsonProperty("event_id")]
         public int EventId { get; set; }
 
@@ -47,18 +34,5 @@ namespace ESI.NET.Models.Calendar
 
         [JsonProperty("title")]
         public string Title { get; set; }
-
-        [JsonProperty("event_response")]
-        private string EventResponse
-        {
-            get
-            {
-                return Response;
-            }
-            set
-            {
-                Response = value;
-            }
-        }
     }
 }

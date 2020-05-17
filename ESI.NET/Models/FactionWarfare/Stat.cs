@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace ESI.NET.Models.FactionWarfare
 {
@@ -8,7 +9,7 @@ namespace ESI.NET.Models.FactionWarfare
         public int CurrentRank { get; set; }
 
         [JsonProperty("enlisted_on")]
-        public string EnlistedOn { get; set; }
+        public DateTime EnlistedOn { get; set; }
 
         [JsonProperty("faction_id")]
         public int FactionId { get; set; }

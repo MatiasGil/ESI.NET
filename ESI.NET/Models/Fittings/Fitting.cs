@@ -24,7 +24,7 @@ namespace ESI.NET.Models.Fittings
     public class Item
     {
         [JsonProperty("flag")]
-        public int Flag { get; set; }
+        public string Flag { get; set; }
 
         [JsonProperty("quantity")]
         public int Quantity { get; set; }

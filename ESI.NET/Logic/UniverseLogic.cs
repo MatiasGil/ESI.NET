@@ -21,23 +21,6 @@ namespace ESI.NET.Logic
         }
 
         /// <summary>
-        /// /universe/ancestries/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<Ancestry>>> Ancestries()
-            => await Execute<List<Ancestry>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, $"/universe/ancestries/");
-
-        /// <summary>
-        /// /universe/asteroid_belts/{asteroid_belt_id}/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<Ancestry>>> AsteroidBelt(int asteroid_belt_id)
-            => await Execute<List<Ancestry>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/asteroid_belts/{asteroid_belt_id}/", replacements: new Dictionary<string, string>()
-            {
-                { "asteroid_belt_id", asteroid_belt_id.ToString() }
-            });
-
-        /// <summary>
         /// /universe/bloodlines/
         /// </summary>
         /// <returns></returns>
@@ -63,6 +46,13 @@ namespace ESI.NET.Logic
             });
 
         /// <summary>
+        /// /universe/constellations/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<int>>> Constellations()
+            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/constellations/");
+
+        /// <summary>
         /// /universe/constellations/{constellation_id}/
         /// </summary>
         /// <param name="constellation_id"></param>
@@ -74,18 +64,18 @@ namespace ESI.NET.Logic
             });
 
         /// <summary>
-        /// /universe/constellations/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<int>>> Constellations()
-            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/constellations/");
-
-        /// <summary>
         /// /universe/factions/
         /// </summary>
         /// <returns></returns>
         public async Task<EsiResponse<List<Faction>>> Factions()
             => await Execute<List<Faction>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/factions/");
+
+        /// <summary>
+        /// /universe/graphics/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<int>>> Graphics()
+            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/graphics/");
 
         /// <summary>
         /// /universe/graphics/{graphic_id}/
@@ -99,11 +89,11 @@ namespace ESI.NET.Logic
             });
 
         /// <summary>
-        /// /universe/graphics/
+        /// /universe/groups/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<List<int>>> Graphics()
-            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/graphics/");
+        public async Task<EsiResponse<List<int>>> Groups()
+            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/groups/");
 
         /// <summary>
         /// /universe/groups/{group_id}/
@@ -115,35 +105,6 @@ namespace ESI.NET.Logic
             {
                 { "group_id", group_id.ToString() }
             });
-
-        /// <summary>
-        /// /universe/groups/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<int>>> Groups()
-            => await Execute<List<int>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/groups/");
-
-        /// <summary>
-        /// /universe/ids/
-        /// </summary>
-        /// <param name="names">Resolve a set of names to IDs in the following categories: agents, alliances, characters, constellations, corporations factions, inventory_types, regions, stations, and systems. Only exact matches will be returned. All names searched for are cached for 12 hours.</param>
-        /// <returns></returns>
-        public async Task<EsiResponse<IDLookup>> IDs(List<string> names)
-            => await Execute<IDLookup>(_client, _config, RequestSecurity.Public, RequestMethod.Post, "/universe/ids/", body: names.ToArray());
-
-        /// <summary>
-        /// /universe/system_jumps/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<Jumps>>> Jumps()
-            => await Execute<List<Jumps>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/system_jumps/");
-
-        /// <summary>
-        /// /universe/system_kills/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<Kills>>> Kills()
-            => await Execute<List<Kills>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/system_kills/");
 
         /// <summary>
         /// /universe/moons/{moon_id}/
@@ -165,6 +126,14 @@ namespace ESI.NET.Logic
             => await Execute<List<ResolvedInfo>>(_client, _config, RequestSecurity.Public, RequestMethod.Post, "/universe/names/", body: any_ids.ToArray());
 
         /// <summary>
+        /// /universe/ids/
+        /// </summary>
+        /// <param name="names">Resolve a set of names to IDs in the following categories: agents, alliances, characters, constellations, corporations factions, inventory_types, regions, stations, and systems. Only exact matches will be returned. All names searched for are cached for 12 hours.</param>
+        /// <returns></returns>
+        public async Task<EsiResponse<IDLookup>> IDs(List<string> names)
+            => await Execute<IDLookup>(_client, _config, RequestSecurity.Public, RequestMethod.Post, "/universe/ids/", body: names.ToArray());
+
+        /// <summary>
         /// /universe/planets/{planet_id}/
         /// </summary>
         /// <param name="planet_id"></param>
@@ -183,6 +152,13 @@ namespace ESI.NET.Logic
             => await Execute<List<Race>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/races/");
 
         /// <summary>
+        /// /universe/regions/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<int[]>> Regions()
+            => await Execute<int[]>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/regions/");
+
+        /// <summary>
         /// /universe/regions/{region_id}/
         /// </summary>
         /// <param name="region_id"></param>
@@ -191,35 +167,6 @@ namespace ESI.NET.Logic
             => await Execute<Region>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/regions/{region_id}/", replacements: new Dictionary<string, string>()
             {
                 { "region_id", region_id.ToString() }
-            });
-
-        /// <summary>
-        /// /universe/regions/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<int[]>> Regions()
-            => await Execute<int[]>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/regions/");
-
-        /// <summary>
-        /// /universe/stars/{star_id}/
-        /// </summary>
-        /// <param name="star_id"></param>
-        /// <returns></returns>
-        public async Task<EsiResponse<Star>> Star(int star_id)
-            => await Execute<Star>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/stars/{star_id}/", replacements: new Dictionary<string, string>()
-            {
-                { "star_id", star_id.ToString() }
-            });
-
-        /// <summary>
-        /// /universe/stargates/{stargate_id}/
-        /// </summary>
-        /// <param name="stargate_id"></param>
-        /// <returns></returns>
-        public async Task<EsiResponse<Stargate>> Stargate(int stargate_id)
-            => await Execute<Stargate>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/stargates/{stargate_id}/", replacements: new Dictionary<string, string>()
-            {
-                { "stargate_id", stargate_id.ToString() }
             });
 
         /// <summary>
@@ -234,6 +181,13 @@ namespace ESI.NET.Logic
             });
 
         /// <summary>
+        /// /universe/structures/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<long[]>> Structures()
+            => await Execute<long[]>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/structures/");
+
+        /// <summary>
         /// /universe/structures/{structure_id}/
         /// </summary>
         /// <param name="structure_id"></param>
@@ -245,11 +199,11 @@ namespace ESI.NET.Logic
             }, token: _data.Token);
 
         /// <summary>
-        /// /universe/structures/
+        /// /universe/systems/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<long[]>> Structures()
-            => await Execute<long[]>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/structures/");
+        public async Task<EsiResponse<int[]>> Systems()
+            => await Execute<int[]>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/systems/");
 
         /// <summary>
         /// /universe/systems/{system_id}/
@@ -263,11 +217,11 @@ namespace ESI.NET.Logic
             });
 
         /// <summary>
-        /// /universe/systems/
+        /// /universe/types/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<int[]>> Systems()
-            => await Execute<int[]>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/systems/");
+        public async Task<EsiResponse<int[]>> Types()
+            => await Execute<int[]>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/types/");
 
         /// <summary>
         /// /universe/types/{type_id}/
@@ -281,10 +235,56 @@ namespace ESI.NET.Logic
             });
 
         /// <summary>
-        /// /universe/types/
+        /// /universe/stargates/{stargate_id}/
+        /// </summary>
+        /// <param name="stargate_id"></param>
+        /// <returns></returns>
+        public async Task<EsiResponse<Stargate>> Stargate(int stargate_id)
+            => await Execute<Stargate>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/stargates/{stargate_id}/", replacements: new Dictionary<string, string>()
+            {
+                { "stargate_id", stargate_id.ToString() }
+            });
+
+        /// <summary>
+        /// /universe/system_jumps/
         /// </summary>
         /// <returns></returns>
-        public async Task<EsiResponse<int[]>> Types()
-            => await Execute<int[]>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/types/");
+        public async Task<EsiResponse<List<Jumps>>> Jumps()
+            => await Execute<List<Jumps>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/system_jumps/");
+
+        /// <summary>
+        /// /universe/system_kills/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<Kills>>> Kills()
+            => await Execute<List<Kills>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/system_kills/");
+
+        /// <summary>
+        /// /universe/stars/{star_id}/
+        /// </summary>
+        /// <param name="star_id"></param>
+        /// <returns></returns>
+        public async Task<EsiResponse<Star>> Star(int star_id)
+            => await Execute<Star>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/stars/{star_id}/", replacements: new Dictionary<string, string>()
+            {
+                { "star_id", star_id.ToString() }
+            });
+
+        /// <summary>
+        /// /universe/ancestries/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<Ancestry>>> Ancestries()
+            => await Execute<List<Ancestry>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/ancestries/");
+
+        /// <summary>
+        /// /universe/asteroid_belts/{asteroid_belt_id}/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<Ancestry>>> AsteroidBelt(int asteroid_belt_id)
+            => await Execute<List<Ancestry>>(_client, _config, RequestSecurity.Public, RequestMethod.Get, "/universe/asteroid_belts/{asteroid_belt_id}/", replacements: new Dictionary<string, string>()
+            {
+                { "asteroid_belt_id", asteroid_belt_id.ToString() }
+            });
     }
 }

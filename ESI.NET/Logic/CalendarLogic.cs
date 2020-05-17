@@ -26,6 +26,18 @@ namespace ESI.NET.Logic
         }
 
         /// <summary>
+        /// /characters/{character_id}/calendar/
+        /// </summary>
+        /// <returns></returns>
+        public async Task<EsiResponse<List<CalendarItem>>> Events()
+            => await Execute<List<CalendarItem>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/calendar/",
+                replacements: new Dictionary<string, string>()
+                {
+                    { "character_id", character_id.ToString() }
+                },
+                token: _data.Token);
+
+        /// <summary>
         /// /characters/{character_id}/calendar/{event_id}/
         /// </summary>
         /// <param name="contract_id"></param>
@@ -36,18 +48,6 @@ namespace ESI.NET.Logic
                 {
                     { "character_id", character_id.ToString() },
                     { "event_id", event_id.ToString() }
-                },
-                token: _data.Token);
-
-        /// <summary>
-        /// /characters/{character_id}/calendar/
-        /// </summary>
-        /// <returns></returns>
-        public async Task<EsiResponse<List<Event>>> Events()
-            => await Execute<List<Event>>(_client, _config, RequestSecurity.Authenticated, RequestMethod.Get, "/characters/{character_id}/calendar/",
-                replacements: new Dictionary<string, string>()
-                {
-                    { "character_id", character_id.ToString() }
                 },
                 token: _data.Token);
 
@@ -71,7 +71,7 @@ namespace ESI.NET.Logic
                 token: _data.Token);
 
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="contract_id"></param>
         /// <returns></returns>

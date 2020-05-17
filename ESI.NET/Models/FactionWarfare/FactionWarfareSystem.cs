@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using ESI.NET.Enumerations;
+using Newtonsoft.Json;
 
 namespace ESI.NET.Models.FactionWarfare
 {
     public class FactionWarfareSystem
     {
         [JsonProperty("contested")]
-        public bool Contested { get; set; }
+        public Contested Contested { get; set; }
 
         [JsonProperty("occupier_faction_id")]
         public int OccupierFactionId { get; set; }
