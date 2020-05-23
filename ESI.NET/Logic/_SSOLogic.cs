@@ -1,4 +1,5 @@
 ﻿using ESI.NET.Enumerations;
+using ESI.NET.Logic;
 using ESI.NET.Models.Character;
 using ESI.NET.Models.SSO;
 using Newtonsoft.Json;
@@ -95,7 +96,7 @@ namespace ESI.NET
         /// <summary>
         /// Get SSO Token for the v2 Auth flow
         /// </summary>
-        public async Task<SsoToken> GetTokenV2(GrantType grantType, string code, string codeVerifier = "", List<string> scopes = null)
+        public async Task<SsoToken> GetTokenV2(GrantType grantType, string code, string codeVerifier, List<string> scopes)
         {
             var body = $"grant_type={grantType.ToEsiValue()}";
 
