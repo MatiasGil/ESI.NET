@@ -96,7 +96,7 @@ namespace ESI.NET
         /// <summary>
         /// Get SSO Token for the v2 Auth flow
         /// </summary>
-        public async Task<SsoToken> GetTokenV2(GrantType grantType, string code, string codeVerifier = "", List<string> scopes = null)
+        public async Task<SsoToken> GetTokenV2(GrantType grantType, string code, string codeVerifier, List<string> scopes)
         {
             var body = $"grant_type={grantType.ToEsiValue()}";
 
