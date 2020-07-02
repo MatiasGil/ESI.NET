@@ -102,48 +102,40 @@ namespace ESI.NET
         {
             SsoToken ssoResult = new SsoToken();
 
-            try
+            var body = $"grant_type={grantType.ToEsiValue()}";
+
+            body += $"&client_id={_config.ClientId}";
+
+            if (grantType == GrantType.AuthorizationCode)
             {
-                var body = $"grant_type={grantType.ToEsiValue()}";
+                body += $"&code={code}";
 
-                body += $"&client_id={_config.ClientId}";
-
-                if (grantType == GrantType.AuthorizationCode)
-                {
-                    body += $"&code={code}";
-
-                    var codeVerifierBytes = Encoding.ASCII.GetBytes(codeVerifier);
-                    var base64CodeVerifierBytes = Convert.ToBase64String(codeVerifierBytes).TrimEnd('=').Replace('+', '-').Replace('/', '_');
-                    body += $"&code_verifier={base64CodeVerifierBytes}";
-
-                }
-                else if (grantType == GrantType.RefreshToken)
-                {
-
-                    body += $"&refresh_token={code}";
-
-                    if (scopes != null)
-                    {
-                        body += $"&scope={string.Join(" ", scopes)}";
-                    }
-                }
-
-                HttpContent postBody = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
-                _client.DefaultRequestHeaders.Host = "login.eveonline.com";
-
-                var response = await _client.PostAsync("https://login.eveonline.com/v2/oauth/token", postBody);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    string resultstr = await response.Content.ReadAsStringAsync();
-
-                    ssoResult = JsonConvert.DeserializeObject<SsoToken>(resultstr);
-                }
-            }
-            catch
-            {
+                var codeVerifierBytes = Encoding.ASCII.GetBytes(codeVerifier);
+                var base64CodeVerifierBytes = Convert.ToBase64String(codeVerifierBytes).TrimEnd('=').Replace('+', '-').Replace('/', '_');
+                body += $"&code_verifier={base64CodeVerifierBytes}";
 
             }
+            else if (grantType == GrantType.RefreshToken)
+            {
 
+                body += $"&refresh_token={code}";
+
+                if (scopes != null)
+                {
+                    body += $"&scope={string.Join(" ", scopes)}";
+                }
+            }
+
+            HttpContent postBody = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
+            _client.DefaultRequestHeaders.Host = "login.eveonline.com";
+
+            var response = await _client.PostAsync("https://login.eveonline.com/v2/oauth/token", postBody);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                string resultstr = await response.Content.ReadAsStringAsync();
+
+                ssoResult = JsonConvert.DeserializeObject<SsoToken>(resultstr);
+            }
             return ssoResult;
         }
 
